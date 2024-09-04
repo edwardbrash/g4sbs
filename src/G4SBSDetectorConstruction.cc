@@ -992,6 +992,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   G4double Abslength_SF6[nentries_SF6] = {10.0*m, 10.0*m };
   
   MPT_temp = new G4MaterialPropertiesTable();
+  G4cout << "About to add properties for SF6" << G4endl;
   MPT_temp->AddProperty("RINDEX", Ephoton_SF6, Rindex_SF6, nentries_SF6 );
   MPT_temp->AddProperty("ABSLENGTH", Ephoton_SF6, Abslength_SF6, nentries_SF6 );
 
@@ -1006,6 +1007,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   G4double Abslength_RICH_air[nentries_C4F10] = {100.0*m, 100.0*m };
 
   MPT_temp = new G4MaterialPropertiesTable();
+  G4cout << "About to add properties for RICH Air" << G4endl;
   MPT_temp->AddProperty("RINDEX", Ephoton_RICH_air, Rindex_RICH_air, nentries_C4F10 );
   MPT_temp->AddProperty("ABSLENGTH", Ephoton_RICH_air, Abslength_RICH_air, nentries_C4F10 );
 
@@ -1064,9 +1066,17 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   //G4double Rcathode[2] = {0.0, 0.0};
 
   MPT_temp = new G4MaterialPropertiesTable();
+  G4cout << "About to add properties for RICH PhotoCathode1" << G4endl;
   MPT_temp->AddProperty("EFFICIENCY", Ephoton_QE_RICH_NIM, PMT_QuantumEfficiency_RICH_NIM, nentries_QE_RICH_NIM );
+  G4cout << "About to add properties for RICH PhotoCathode2" << G4endl;
   MPT_temp->AddProperty("RINDEX", Ephoton_quartz, Rindex_quartz, nentries_quartz );
-  MPT_temp->AddProperty("ABSLENGTH", Ephoton_abs_quartz, Abslength_quartz, nentries_quartz );
+  G4cout << "About to add properties for RICH PhotoCathode3" << G4endl;
+  for (int iii=0; iii<Nabs_quartz; iii++) {
+	G4cout << iii << " " << Ephoton_abs_quartz[iii] << " " << Abslength_quartz[iii] << G4endl;
+  }
+  //MPT_temp->AddProperty("ABSLENGTH", Ephoton_abs_quartz, Abslength_quartz, nentries_quartz );
+  MPT_temp->AddProperty("ABSLENGTH", Ephoton_abs_quartz, Abslength_quartz, Nabs_quartz );
+  G4cout << "About to add properties for RICH PhotoCathode4" << G4endl;
   //MPT_temp->AddProperty("REFLECTIVITY", Ephot_Rcathode, Rcathode, 2 );
 
   if( fMaterialsListOpticalPhotonDisabled.find( "Photocathode_material_RICH" ) == fMaterialsListOpticalPhotonDisabled.end() ){
@@ -1106,9 +1116,11 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   //G4double Rcathode[2] = {0.0, 0.0};
 
   MPT_temp = new G4MaterialPropertiesTable();
+  G4cout << "About to add properties for GRINCH" << G4endl;
   MPT_temp->AddProperty("EFFICIENCY", Ephoton_QE_GRINCH, PMT_QuantumEfficiency_GRINCH, nentries_QE_GRINCH );
   MPT_temp->AddProperty("RINDEX", Ephoton_quartz, Rindex_quartz, nentries_quartz );
-  MPT_temp->AddProperty("ABSLENGTH", Ephoton_abs_quartz, Abslength_quartz, nentries_quartz );
+  //MPT_temp->AddProperty("ABSLENGTH", Ephoton_abs_quartz, Abslength_quartz, nentries_quartz );
+  MPT_temp->AddProperty("ABSLENGTH", Ephoton_abs_quartz, Abslength_quartz, Nabs_quartz );
   //MPT_temp->AddProperty("REFLECTIVITY", Ephot_Rcathode, Rcathode, 2 );
 
   if( fMaterialsListOpticalPhotonDisabled.find( "Photocathode_material_GRINCH" ) == fMaterialsListOpticalPhotonDisabled.end() ){
@@ -1191,6 +1203,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
 
 
   MPT_temp = new G4MaterialPropertiesTable();
+  G4cout << "About to add properties for Aerogel" << G4endl;
   MPT_temp->AddProperty("RINDEX", Ephoton_aerogel, Rindex_aerogel, nsteps );
   MPT_temp->AddProperty("RAYLEIGH", Ephoton_aerogel, Rayleigh_aerogel, nsteps );
   //MPT_temp->AddConstProperty("ABSLENGTH", 10.0*m );
@@ -1216,6 +1229,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
     }
   }
   G4MaterialPropertiesTable* mptQuartz=new G4MaterialPropertiesTable();
+  G4cout << "About to add properties for Quartz" << G4endl;
   mptQuartz->AddProperty("RINDEX",PhotonEnergy,rindex_Quartz,nEntries);
   mptQuartz->AddProperty("ABSLENGTH",PhotonEnergy,absl_Quartz,nEntries);
 
@@ -1507,6 +1521,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   TF5->AddMaterial(As2O3, 0.005);
   
   MPT_temp = new G4MaterialPropertiesTable();
+  G4cout << "About to add properties for ECAL" << G4endl;
   MPT_temp->AddProperty("RINDEX", Ephoton_ECAL_QE, Rindex_TF1, nentries_ecal_QE );
   //MPT_temp->AddProperty("ABSLENGTH", Ephoton_ECAL_QE, Abslength_TF1, nentries_ecal_QE );
   MPT_temp->AddProperty("ABSLENGTH", Ephoton_atilde, atilde, nentries_atilde );
@@ -1612,6 +1627,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
     mat_temp->AddMaterial( TF1, 1.0 );
 
     MPT_temp = new G4MaterialPropertiesTable();
+    G4cout << "About to add properties for ECAL2" << G4endl;
     MPT_temp->AddProperty("RINDEX", Ephoton_ECAL_QE, Rindex_TF1, nentries_ecal_QE );
     MPT_temp->AddProperty("ABSLENGTH", Ephoton_abslength, abslength_ECAL, Ntemp+1 );
 
@@ -1628,6 +1644,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
 	mat_temp->AddMaterial( TF1, 1.0 );
 
 	MPT_temp = new G4MaterialPropertiesTable();
+        G4cout << "About to add properties for ECAL3" << G4endl;
 	MPT_temp->AddProperty("RINDEX", Ephoton_ECAL_QE, Rindex_TF1, nentries_ecal_QE );
 
 	G4double abslength_temp[Ntemp+1];
@@ -1638,6 +1655,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
 	  // 	 << spline_atilde->Eval( Ephoton_abslength[iE] )/cm << G4endl;
 	}
 	
+        G4cout << "About to add properties for ECAL4" << G4endl;
 	MPT_temp->AddProperty("ABSLENGTH", Ephoton_abslength, abslength_temp, Ntemp+1 );
 
 	if( fMaterialsListOpticalPhotonDisabled.find( matname.Data() ) == fMaterialsListOpticalPhotonDisabled.end() ){
@@ -1686,6 +1704,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
     1.52938, 1.53188};
 
   MPT_temp = new G4MaterialPropertiesTable();
+  G4cout << "About to add properties for ECAL Quartz" << G4endl;
   MPT_temp->AddProperty("RINDEX", Ephoton_ECAL_QE, Rindex_quartz_ecal, nentries_ecal_QE);
   MPT_temp->AddProperty("ABSLENGTH", Ephoton_ECAL_QE, Abslength_TF1, nentries_ecal_QE); //Do we need this?? 
 
@@ -1712,6 +1731,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   Photocathode_material_ecal->AddElement( Cs, natoms=1 );
 
   MPT_temp = new G4MaterialPropertiesTable();
+        G4cout << "About to add properties for ECAL PMT" << G4endl;
   MPT_temp->AddProperty("EFFICIENCY", Ephoton_ECAL_QE, PMT_ECAL_QE, nentries_ecal_QE ); 
   MPT_temp->AddProperty("RINDEX", Ephoton_ECAL_QE, Rindex_quartz_ecal, nentries_ecal_QE );
 
@@ -1752,6 +1772,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
     1000.0*cm, 1000.0*cm, 1000.0*cm, 1000.0*cm, 1000.0*cm,
     1000.0*cm, 1000.0*cm};
 
+        G4cout << "About to add properties for ECAL Air" << G4endl;
   MPT_temp->AddProperty("RINDEX", Ephoton_ECAL_QE, Rindex_air, nentries_ecal_QE );
   MPT_temp->AddProperty("ABSLENGTH", Ephoton_ECAL_QE, Abslength_air, nentries_ecal_QE );
 
@@ -1802,6 +1823,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   G4double AbsLength_CDET[2] = {3.80*m, 3.80*m};
     
   MPT_temp = new G4MaterialPropertiesTable();
+        G4cout << "About to add properties for CDET scint" << G4endl;
   MPT_temp->AddProperty("SCINTILLATIONCOMPONENT1", Ephoton_CDET, RelativeYield_CDET, nentries_CDET_scint );
   MPT_temp->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 2.1*ns);
   MPT_temp->AddConstProperty("SCINTILLATIONYIELD", 0.64*17400.0/MeV);
@@ -1853,6 +1875,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
     1.52938, 1.53188 };
 
   MPT_temp = new G4MaterialPropertiesTable();
+        G4cout << "About to add properties for CDET PMT" << G4endl;
   MPT_temp->AddProperty("EFFICIENCY", EPhoton_CDet, PMT_CDet_QE, nentries_CDet);
   MPT_temp->AddProperty("RINDEX", EPhoton_CDet, Rindex_CDet, nentries_CDet);
 
@@ -1872,6 +1895,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   G4double Ephoton_BCF92_rindex[2] = {2.0*eV, 3.5*eV};
   G4double Rindex_BCF_92[2] = {1.60, 1.60};
   G4double Abslength_BCF_92[2] = {3.5*m, 3.5*m};
+        G4cout << "About to add properties for CDET polystyrene" << G4endl;
   MPT_temp->AddProperty( "RINDEX", Ephoton_BCF92_rindex, Rindex_BCF_92, 2 );
   MPT_temp->AddProperty( "ABSLENGTH", Ephoton_BCF92_rindex, Abslength_BCF_92, 2 );
   MPT_temp->AddConstProperty( "WLSTIMECONSTANT", 2.7*ns );
@@ -1923,6 +1947,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
     BCF92_emission_relative_sorted[i] = BCF92_emission_relative[nentries_BCF92_emission-i-1];
   }
     
+        G4cout << "About to add properties for CDET WLS" << G4endl;
   MPT_temp->AddProperty("WLSABSLENGTH", Ephoton_BCF92_abs, WLSabslength_BCF92, nentries_BCF92_abs );
   MPT_temp->AddProperty("WLSCOMPONENT", Ephoton_BCF92_emission_sorted, BCF92_emission_relative_sorted, nentries_BCF92_emission );
 
@@ -1945,6 +1970,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   G4double Rindex_acrylic[2] = {1.49, 1.49 };
   G4double abslength_acrylic[2] = {3.5*m, 3.5*m};
     
+        G4cout << "About to add properties for CDET WLS2" << G4endl;
   MPT_temp->AddProperty("RINDEX", ephoton_acrylic, Rindex_acrylic, 2 );
   MPT_temp->AddProperty("ABSLENGTH", ephoton_acrylic, abslength_acrylic, 2 );
 
@@ -2012,6 +2038,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
     1.51771, 1.51828, 1.51912, 1.52073, 1.52370 };
 
   MPT_temp = new G4MaterialPropertiesTable();
+        G4cout << "About to add properties for BB PMT" << G4endl;
   MPT_temp->AddProperty("EFFICIENCY", EPhoton_BB, PMT_BB_QE, nentries_BB ); 
   MPT_temp->AddProperty("RINDEX", EPhoton_BB, Rindex_BB, nentries_BB );
 
@@ -2083,6 +2110,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   }
 
   G4MaterialPropertiesTable* MPT_EJ232 = new G4MaterialPropertiesTable();
+        G4cout << "About to add properties for BB PMT2" << G4endl;
   MPT_EJ232->AddProperty("RINDEX"       , PhotonEnergyEJ232 , RefractiveIndexEJ232 , nEntriesEJ232);
   MPT_EJ232->AddProperty("SCINTILLATIONCOMPONENT1", PhotonEnergyEJ232 , FAST_EJ232_sorted           , nEntriesEJ232);
   MPT_EJ232->AddProperty("ABSLENGTH",     PhotonEnergyEJ232 , ABSL_EJ232_sorted           , nEntriesEJ232);
@@ -2137,6 +2165,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
     EmissionFibBC484_sorted[ii] = EmissionFibBC484[nEntriesBC484-ii-1];
   }
   G4MaterialPropertiesTable* MPT_BC484 = new G4MaterialPropertiesTable();
+        G4cout << "About to add properties for BB scint" << G4endl;
   MPT_BC484->AddProperty("RINDEX"              , PhotonEnergyBC484 , RefractiveIndexBC484 , nEntriesBC484);
   MPT_BC484->AddProperty("WLSABSLENGTH"        , PhotonEnergyBC484 , AbsWLSfiberBC484_sorted     , nEntriesBC484);
   MPT_BC484->AddProperty("WLSCOMPONENT"        , PhotonEnergyBC484 , EmissionFibBC484_sorted     , nEntriesBC484);
@@ -2184,6 +2213,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
     };
 
   G4MaterialPropertiesTable *Glass_HC_mt = new G4MaterialPropertiesTable();
+        G4cout << "About to add properties for HCAL Glass" << G4endl;
   Glass_HC_mt->AddProperty("ABSLENGTH", PhotonEnergyBC484 , Glass_HC_AbsLength , nEntriesEJ232 );
   Glass_HC_mt->AddProperty("RINDEX"   , PhotonEnergyBC484 , Glass_HC_RIND      , nEntriesEJ232 );
 
@@ -2220,6 +2250,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
   G4double MilliPoreBK[nEntriesEJ232] = { 0.1 };
 
   G4MaterialPropertiesTable *Paper_MPT = new G4MaterialPropertiesTable();
+        G4cout << "About to add properties for HCAL Teflon" << G4endl;
   Paper_MPT->AddProperty("RINDEX"                , PhotonEnergyBC484 , MilliPoreRefrIndexl , nEntriesEJ232);
   Paper_MPT->AddProperty("REFLECTIVITY"          , PhotonEnergyBC484 , MilliPoreRefl_sorted       , nEntriesEJ232);
   Paper_MPT->AddProperty("SPECULARLOBECONSTANT"  , PhotonEnergyBC484 , MilliPoreSL , nEntriesEJ232);
@@ -2335,6 +2366,7 @@ void G4SBSDetectorConstruction::ConstructMaterials(){
 
   MPT_temp = new G4MaterialPropertiesTable();
 
+        G4cout << "About to add properties for HCAL Pyrex" << G4endl;
   MPT_temp->AddProperty("RINDEX", Ephoton_rindex_pyrex, Rindex_pyrex, nentries_rindex_pyrex );
   MPT_temp->AddProperty("ABSLENGTH", Ephoton_abslength_pyrex, abslength_pyrex, nentries_abslength_pyrex );
 

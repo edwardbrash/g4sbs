@@ -5,6 +5,9 @@ GEN-map1.table
 GEP_12map0.table
 ## Should probably ignore root files too
 *.root
+data/*.root
+runscripts/batch/slurm*.out
+runscripts/batch/g4sbs*.csv
 ## Ignore more of VIM's temporary files
 .*.swo
 ## Ignore emacs temporary files
