@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "Branch: master"
+git commit -am "Updates"
+git push origin master
